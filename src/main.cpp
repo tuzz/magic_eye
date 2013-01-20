@@ -17,22 +17,19 @@ IplImage *repetitions(IplImage *source) {
   uchar *input  = (uchar *)source->imageData;
   uchar *output = (uchar *)destination->imageData;
 
-  int index, offset, h, w, c, i;
-  uchar pixel, current;
+  int h, w, i, c;
+  uchar x1, x2;
 
   for (h = 0; h < height;   h++)
   for (w = 0; w < width;    w++)
+  for (i = 0; i < width;    i++)
   for (c = 0; c < channels; c++) {
 
-    index = h * step + w * channels + c;
-    pixel = input[index];
+    x1 = input[h * step + w * channels + c];
+    x2 = input[h * step + i * channels + c];
 
-    for (i = 0; i < width; i++) {
-      current = input[h * step + i * channels + c];
-      if (current == pixel) {
-        offset = abs(w - i);
-        output[h * step + offset * channels + c] = 255;
-      }
+    if (x1 == x2 && w != i) {
+      output[h * step + abs(w - i) * channels + c] = 255;
     }
 
   }
