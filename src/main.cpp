@@ -1,34 +1,27 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include <math.h>
 #include <cv.h>
 #include <highgui.h>
 
 #include "offset.hpp"
+#include "subtraction.hpp"
+
+IplImage *solve(IplImage *magicEye) {
+  return subtraction(magicEye, offset(magicEye));
+}
 
 int main(int argc, char **argv) {
-  IplImage *image = cvLoadImage("foo.jpg");
-  int o = offset(image);
+  IplImage *magicEye = cvLoadImage("foo.jpg");
+  IplImage *solution = solve(magicEye);
 
-  uchar *data = (uchar *)image->imageData;
+  cvNamedWindow("Magic Eye", CV_WINDOW_AUTOSIZE);
+  cvNamedWindow("Solution",  CV_WINDOW_AUTOSIZE);
 
-  int width = image->width;
-  int height = image->height;
-  int step = image->widthStep;
-  int channels = image->nChannels;
+  cvMoveWindow("Magic Eye", 100, 100);
+  cvMoveWindow("Solution",  magicEye->width + 200, 100);
 
-  for (int h = 0; h < height;   h++)
-  for (int w = 0; w < width;    w++)
-  for (int c = 0; c < channels; c++) {
-    if (w != o) {
-      continue;
-    }
+  cvShowImage("Magic Eye", magicEye);
+  cvShowImage("Solution",  solution);
 
-    data[h * step + w * channels + c] = 0;
-  }
-
-  cvNamedWindow("Window", CV_WINDOW_AUTOSIZE);
-  cvShowImage("Window", image);
   cvWaitKey(0);
+
   return 0;
 }
