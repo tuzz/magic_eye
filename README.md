@@ -6,7 +6,7 @@ Attempts to solve [autostereograms](http://en.wikipedia.org/wiki/Autostereogram)
 
 ## How it works
 
-The algorithm for finding a solution is relatively straightford.
+The algorithm for finding a solution is relatively straightforward.
 
 The first step involves finding the offset at which the autostereogram repeats. This is accomplished by calculating the total pixel difference between the image and an overlap of itself at various offsets over a reasonable subsection of the image. The minimal diff is chosen as the offset.
 
@@ -35,5 +35,11 @@ make
 If you're using Vim, you can speed this up by mapping the build script to a key:
 
 ```
-:nmap - :w \| !mkdir -p /tmp/build && cd /tmp/build && cmake path/to/src && make && ./magic_eye
+:nmap - :w \| !mkdir -p /tmp/build && cd /tmp/build && cmake path/to/src && make && ./magic_eye test.jpg
 ```
+
+## Contribution
+
+Feel free to contribute. No commit is too small.
+
+You should follow me: [@cpatuzzo](https://twitter.com/cpatuzzo)
