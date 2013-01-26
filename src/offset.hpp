@@ -1,8 +1,9 @@
 #include <math.h>
 #include <cv.h>
 
-#define MIN_OFFSET_FRACTION 16
-#define MAX_OFFSET_FRACTION 4
+#define MIN_FRACTION 16
+#define MAX_FRACTION 4
+#define LINES 16
 
 int offset(IplImage *image);
 

@@ -5,7 +5,7 @@ int offset(IplImage *image) {
 
   int current, best, min = -1;
 
-  for (int i = width / MIN_OFFSET_FRACTION; i < width / MAX_OFFSET_FRACTION; i++) {
+  for (int i = width / MIN_FRACTION; i < width / MAX_FRACTION; i++) {
     current = offsetDiff(i, image);
 
     if (current < min || min == -1) {
@@ -20,20 +20,22 @@ int offset(IplImage *image) {
 int offsetDiff(int offset, IplImage *image) {
   int total = 0;
 
-  int width    = image->width;
   int height   = image->height;
+  int width    = image->width;
   int channels = image->nChannels;
   int step     = image->widthStep;
 
   uchar *data = (uchar *)image->imageData;
 
+  int maxLines = (LINES > height) ? height : LINES;
+
   int h, w, c, x1, x2;
 
-  for (h = 0; h < height;   h++)
+  for (h = 0; h < height; h += height / maxLines)
   for (w = 0; w < width / 2;    w++)
   for (c = 0; c < channels; c++) {
-    x1 = data[h * step + w * channels + c];
-    x2 = data[h * step + (w + offset) * channels + c];
+    x1 = data[0 * step + w * channels + c];
+    x2 = data[0 * step + (w + offset) * channels + c];
 
     total += abs(x1 - x2);
   }
