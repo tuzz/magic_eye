@@ -2,7 +2,7 @@
 
 Attempts to solve [autostereograms](http://en.wikipedia.org/wiki/Autostereogram) programmatically.
 
-![Screenshot](https://raw.github.com/cpatuzzo/magic_eye/master/screen_shot.png)
+![Screenshot](https://raw.github.com/tuzz/magic_eye/master/screen_shot.png)
 
 ## How it works
 
