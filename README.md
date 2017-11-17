@@ -37,9 +37,3 @@ If you're using Vim, you can speed this up by mapping the build script to a key:
 ```
 :nmap - :w \| !mkdir -p /tmp/build && cd /tmp/build && cmake path/to/src && make && ./magic_eye test.jpg
 ```
-
-## Contribution
-
-Feel free to contribute. No commit is too small.
-
-You should follow me: [@cpatuzzo](https://twitter.com/cpatuzzo)
